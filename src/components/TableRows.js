@@ -8,9 +8,6 @@ export default function TableRows() {
   const [people, setPeople] = useState([]);
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isSorted, setIsSorted] = useState(false);
-
-  const columnRef = useRef();
 
   async function searchApi() {
     let { data: { results: users } } = await getUsers.searchPeople();
@@ -34,12 +31,29 @@ export default function TableRows() {
 
   useEffect(() => {
     searchApi();
-    setCategories(['Image', 'Name', 'Age', 'Location', 'Email'])
+    setCategories([
+      {name: 'Image', isSorted: false}, 
+      {name: 'Name', isSorted: false}, 
+      {name: 'Age', isSorted: false}, 
+      {name: 'Location', isSorted: false}, 
+      {name: 'Email', isSorted: false},
+    ])
   },[])
 
-  const sortColumn = () => {
-    console.log(columnRef.current.innerHTML);
-    setPeople(_.sortBy(people, columnRef.current.innerHTML.toLowerCase()));
+  const sortColumn = (column, isSorted) => {
+    console.log(column);
+    if (isSorted) {
+      setPeople(_.orderBy(people, column.toLowerCase(), ['asc']));
+    } else {
+      setPeople(_.orderBy(people, column.toLowerCase(), ['desc']));
+    }
+    setCategories(categories.map(category => {
+      if (category.name === column) {
+        let adjCategory = {...category, isSorted: !category.isSorted}
+        return adjCategory;
+      }
+      return category;
+    }))
   }
 
   return (
@@ -47,9 +61,9 @@ export default function TableRows() {
       <Table stickyHeader>
         <TableHead>
           <TableRow>
-            {isLoading || categories.map(category => {
+            {isLoading || categories.map(({name, isSorted}) => {
               return (
-                <TableCell onClick={sortColumn}>{category}</TableCell>
+                <TableCell key={name} onClick={() => sortColumn(name, isSorted)}>{name}</TableCell>
               )
             })}
           </TableRow>
