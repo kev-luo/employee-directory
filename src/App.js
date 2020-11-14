@@ -3,6 +3,7 @@ import './App.css';
 import TableRow from './components/TableRow';
 import TableRows from './components/TableRows';
 import MenuBar from './components/MenuBar';
+import Search from './components/Search';
 import { PeopleProvider } from './utils/PeopleContext';
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
     <>
     {/* <TableRows /> */}
       <MenuBar />
+      <Search />
       <TableRow />
     </>
   );

@@ -1,16 +1,13 @@
 import React from 'react'
 import './MenuBar.css';
+import { AppBar, Toolbar, Typography } from '@material-ui/core';
 
 export default function MenuBar() {
   return (
-    <div className="ui grid">
-      <div className="column">
-        <div className="ui menu">
-          <div className="title" style={{margin: 'auto', padding: '1.5rem'}}>
-            Employee Tracker
-          </div>
-        </div>
-      </div>
-    </div>
+    <AppBar color="primary" position="relative">
+      <Toolbar>
+        <Typography color="inherit" variant='h6'>Employee Search</Typography>
+      </Toolbar>
+    </AppBar>
   )
 }
