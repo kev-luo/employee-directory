@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Paper, TextField, Grid, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -18,17 +18,15 @@ const useStyles = makeStyles({
 })
 
 function Search() {
-  const { people, setPeople, categories, isLoading } = usePeople();
-  const [search, setSearch] = useState('');
+  const { people, setSearchResults, search, setSearch } = usePeople();
 
   const handleSearch = (e) => {
     const searchTerm = e.target.value;
     setSearch(searchTerm);
-    setPeople(prevPeople => {
-      return prevPeople.filter(person => {
-        return person.firstname.toLowerCase().includes(searchTerm.toLowerCase());
-      })
+    let filteredPeople = people.filter(person => {
+      return person.firstname.toLowerCase().includes(searchTerm.toLowerCase());
     })
+    setSearchResults(filteredPeople);
   }
 
   const classes = useStyles();

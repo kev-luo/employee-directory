@@ -4,7 +4,7 @@ import { usePeople } from '../../utils/PeopleContext';
 
 export default function TableData() {
 
-  const { people, categories, isLoading, sortColumn } = usePeople();
+  const { searchResults, categories, isLoading, sortColumn } = usePeople();
 
   return (
     <TableContainer component={ Paper }>
@@ -21,7 +21,7 @@ export default function TableData() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {isLoading || people.map(person => {
+          {isLoading || searchResults.map(person => {
             return (
               <TableRow key={person.id}>
                 <TableCell><img src={person.image} alt={person.firstname} /></TableCell>

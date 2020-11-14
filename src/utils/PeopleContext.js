@@ -10,6 +10,8 @@ export const PeopleProvider = ({ children }) => {
   const [people, setPeople] = useState([]);
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [search, setSearch] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
 
   async function searchApi() {
     let { data: { results: users } } = await getUsers.searchPeople();
@@ -26,6 +28,7 @@ export const PeopleProvider = ({ children }) => {
       }
     })
     setPeople(userData);
+    setSearchResults(userData);
     setIsLoading(false);
   }
 
@@ -44,9 +47,9 @@ export const PeopleProvider = ({ children }) => {
 
   const sortColumn = (column, isSorted) => {
     if (isSorted) {
-      setPeople(_.orderBy(people, column.split(' ').join('').toLowerCase(), ['desc']));
+      setSearchResults(_.orderBy(searchResults, column.split(' ').join('').toLowerCase(), ['desc']));
     } else {
-      setPeople(_.orderBy(people, column.split(' ').join('').toLowerCase(), ['asc']));
+      setSearchResults(_.orderBy(searchResults, column.split(' ').join('').toLowerCase(), ['asc']));
     }
     setCategories(categories.map(category => {
       if (category.name === column) {
@@ -58,7 +61,7 @@ export const PeopleProvider = ({ children }) => {
   }
 
   return(
-    <PeopleContext.Provider value={{people, setPeople, categories, isLoading, sortColumn}}>
+    <PeopleContext.Provider value={{ people, setPeople, categories, isLoading, sortColumn, search, setSearch, searchResults, setSearchResults }}>
       { children }
     </PeopleContext.Provider>
   )
