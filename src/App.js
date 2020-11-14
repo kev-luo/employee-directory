@@ -1,18 +1,17 @@
-import 'semantic-ui-css/semantic.min.css';
 import './App.css';
 import TableRow from './components/TableRow';
 import TableRows from './components/TableRows';
-import MenuBar from './components/MenuBar';
+import Appbar from './components/Appbar';
 import Search from './components/Search';
 import { PeopleProvider } from './utils/PeopleContext';
 
 function App() {
   return (
     <>
-    {/* <TableRows /> */}
-      <MenuBar />
+      <Appbar />
       <Search />
-      <TableRow />
+      <TableRows />
+      {/* <TableRow /> */}
     </>
   );
 }

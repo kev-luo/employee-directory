@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Table, Ref } from 'semantic-ui-react'
 import _ from 'lodash';
 import { getUsers } from '../utils/API';
 

@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   }
 })
 
-function MenuBar() {
+function Appbar() {
   const classes = useStyles();
   return (
     <Paper elevation={0} className={classes.root}>
@@ -29,4 +29,4 @@ function MenuBar() {
   )
 }
 
-export default MenuBar;
+export default Appbar;
