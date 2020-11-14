@@ -14,8 +14,21 @@ export default function TableRows() {
 
   async function searchApi() {
     let { data: { results: users } } = await getUsers.searchPeople();
-    setPeople(users);
-    console.log(users);
+    let userData = users.map(user => {
+      return {
+        id: user.login.uuid,
+        firstname: user.name.first,
+        lastname: user.name.last,
+        email: user.email,
+        age: user.dob.age,
+        city: user.location.city,
+        state: user.location.state,
+        country: user.location.country,
+        image: user.picture.thumbnail,
+      }
+    })
+    setPeople(userData);
+    console.log(userData);
     setIsLoading(false);
   }
 
@@ -30,10 +43,10 @@ export default function TableRows() {
 
   return (
     <TableContainer component={ Paper }>
-      <Table>
+      <Table stickyHeader>
         <TableHead>
           <TableRow>
-            <TableCell>Profile Pic</TableCell>
+            <TableCell>Image</TableCell>
             <TableCell>Name</TableCell>
             <TableCell>Age</TableCell>
             <TableCell>Location</TableCell>
@@ -43,11 +56,11 @@ export default function TableRows() {
         <TableBody>
           {isLoading || people.map(person => {
             return (
-              <TableRow key={person.cell}>
-                <TableCell><img src={person.picture.thumbnail} alt={person.name.first} /></TableCell>
-                <TableCell>{person.name.first} {person.name.last}</TableCell>
-                <TableCell>{person.dob.age}</TableCell>
-                <TableCell>{person.location.city}, {person.location.state} - {person.location.country}</TableCell>
+              <TableRow key={person.id}>
+                <TableCell><img src={person.image} alt={person.firstname} /></TableCell>
+                <TableCell>{person.firstname} {person.lastname}</TableCell>
+                <TableCell>{person.age}</TableCell>
+                <TableCell>{person.city}, {person.state} - {person.country}</TableCell>
                 <TableCell>{person.email}</TableCell>
               </TableRow>
             )
