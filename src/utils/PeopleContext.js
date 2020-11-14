@@ -61,7 +61,7 @@ export const PeopleProvider = ({ children }) => {
   }
 
   return(
-    <PeopleContext.Provider value={{ people, setPeople, categories, isLoading, sortColumn, search, setSearch, searchResults, setSearchResults }}>
+    <PeopleContext.Provider value={{ people, categories, isLoading, sortColumn, search, setSearch, searchResults, setSearchResults }}>
       { children }
     </PeopleContext.Provider>
   )
