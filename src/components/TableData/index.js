@@ -1,59 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import _ from 'lodash';
+import React from 'react'
 import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper } from '@material-ui/core';
-import { getUsers } from '../../utils/API';
+import { usePeople } from '../../utils/PeopleContext';
 
 export default function TableData() {
 
-  const [people, setPeople] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  async function searchApi() {
-    let { data: { results: users } } = await getUsers.searchPeople();
-    let userData = users.map(user => {
-      return {
-        id: user.login.uuid,
-        firstname: user.name.first,
-        lastname: user.name.last,
-        email: user.email,
-        age: user.dob.age,
-        city: user.location.city,
-        country: user.location.country,
-        image: user.picture.thumbnail,
-      }
-    })
-    setPeople(userData);
-    setIsLoading(false);
-  }
-
-  useEffect(() => {
-    searchApi();
-    setCategories([
-      {name: 'Image', isSorted: false}, 
-      {name: 'First Name', isSorted: false},
-      {name: 'Last Name', isSorted: false}, 
-      {name: 'Age', isSorted: false}, 
-      {name: 'City', isSorted: false},
-      {name: 'Country', isSorted: false}, 
-      {name: 'Email', isSorted: false},
-    ])
-  },[])
-
-  const sortColumn = (column, isSorted) => {
-    if (isSorted) {
-      setPeople(_.orderBy(people, column.split(' ').join('').toLowerCase(), ['desc']));
-    } else {
-      setPeople(_.orderBy(people, column.split(' ').join('').toLowerCase(), ['asc']));
-    }
-    setCategories(categories.map(category => {
-      if (category.name === column) {
-        let adjCategory = {...category, isSorted: !category.isSorted}
-        return adjCategory;
-      }
-      return category;
-    }))
-  }
+  const { people, categories, isLoading, sortColumn } = usePeople();
 
   return (
     <TableContainer component={ Paper }>
