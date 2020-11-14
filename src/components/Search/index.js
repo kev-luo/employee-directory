@@ -22,8 +22,13 @@ function Search() {
   const [search, setSearch] = useState('');
 
   const handleSearch = (e) => {
-    setSearch(e.target.value);
-    console.log(search);
+    const searchTerm = e.target.value;
+    setSearch(searchTerm);
+    setPeople(prevPeople => {
+      return prevPeople.filter(person => {
+        return person.firstname.toLowerCase().includes(searchTerm.toLowerCase());
+      })
+    })
   }
 
   const classes = useStyles();
