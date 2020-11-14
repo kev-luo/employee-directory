@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import _ from 'lodash';
 import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper } from '@material-ui/core';
-import { getUsers } from '../utils/API';
+import { getUsers } from '../../utils/API';
 
-export default function TableRows() {
+export default function TableData() {
 
   const [people, setPeople] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -24,7 +24,6 @@ export default function TableRows() {
       }
     })
     setPeople(userData);
-    console.log(userData);
     setIsLoading(false);
   }
 
