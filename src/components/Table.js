@@ -7,20 +7,14 @@ export default function Table() {
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell
-            sorted={column === 'name' ? direction : null}
-            onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'name' })}
           >
             Name
           </Table.HeaderCell>
           <Table.HeaderCell
-            sorted={column === 'age' ? direction : null}
-            onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'age' })}
           >
             Age
           </Table.HeaderCell>
           <Table.HeaderCell
-            sorted={column === 'gender' ? direction : null}
-            onClick={() => dispatch({ type: 'CHANGE_SORT', column: 'gender' })}
           >
             Gender
           </Table.HeaderCell>
