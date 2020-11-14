@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 
-import { API } from './API';
+import { getUsers } from './API';
 
 const PeopleContext = React.createContext();
 
 const PeopleProvider = async () => {
-  let { data: peopleArray } = await API.searchPeople();
+  let { data } = await getUsers.searchPeople();
 
-  return <PeopleContext.Provider value={ peopleArray } />
+  return <PeopleContext.Provider value={ data } />
 }
 
 const usePeopleContext = () => {
