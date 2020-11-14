@@ -58,7 +58,7 @@ export const PeopleProvider = ({ children }) => {
   }
 
   return(
-    <PeopleContext.Provider value={{people, categories, isLoading, sortColumn}}>
+    <PeopleContext.Provider value={{people, setPeople, categories, isLoading, sortColumn}}>
       { children }
     </PeopleContext.Provider>
   )

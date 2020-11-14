@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Paper, TextField, Grid, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+
+import { usePeople } from '../../utils/PeopleContext';
 
 const useStyles = makeStyles({
   root: {
@@ -16,12 +18,20 @@ const useStyles = makeStyles({
 })
 
 function Search() {
+  const { people, setPeople, categories, isLoading } = usePeople();
+  const [search, setSearch] = useState('');
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+    console.log(search);
+  }
+
   const classes = useStyles();
   return (
     <Paper className={classes.root}>
       <Grid container>
         <Grid item xs={10} md={11} className={classes.grid}>
-          <TextField fullWidth/>
+          <TextField value={search} onChange={handleSearch} fullWidth/>
         </Grid>
         <Grid item xs={2} md={1}>
           <Button fullWidth variant="outlined" className={classes.button}>
