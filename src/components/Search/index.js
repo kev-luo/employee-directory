@@ -20,18 +20,25 @@ const useStyles = makeStyles({
 
 function Search() {
   const [dropdown, setDropdown] = useState('');
-
   const { people, setSearchResults, categories, isLoading, search, setSearch } = usePeople();
 
   const handleSearch = (e) => {
     const searchTerm = e.target.value;
     setSearch(searchTerm);
-    let filteredPeople = people.filter(person => {
-      return person.firstname.toLowerCase().includes(searchTerm.toLowerCase());
-    })
+    let filteredPeople;
+    if (dropdown === '') {
+      filteredPeople = people.filter(person => {
+        return person.firstname.toLowerCase().includes(searchTerm.toLowerCase());
+      })
+    } else {
+      filteredPeople = people.filter(person => {
+        let formatCat = dropdown.split(' ').join('').toLowerCase();
+        let details = person[formatCat]
+        return details.toLowerCase().includes(searchTerm.toLowerCase());
+      })
+    }
     setSearchResults(filteredPeople);
   }
-  console.log(categories);
 
   const classes = useStyles();
   return (
@@ -48,9 +55,11 @@ function Search() {
               onChange={(e) => setDropdown(e.target.value)}
             >
             {isLoading || categories.map(({ name }) => {
-              return(
-                <MenuItem value={name}>{name}</MenuItem>
-              )
+              if ( name !== 'Image' && name !== 'Age' ) {
+                return(
+                  <MenuItem key={name} value={name}>{name}</MenuItem>
+                )
+              }
             })}
             </Select>
           </FormControl>
