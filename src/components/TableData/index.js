@@ -1,6 +1,7 @@
 import React from 'react'
 import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper } from '@material-ui/core';
 import { usePeople } from '../../utils/PeopleContext';
+import './Table.css';
 
 export default function TableData() {
 
@@ -15,7 +16,7 @@ export default function TableData() {
               return name === 'Image' ? (
                 <TableCell key={name}>{name}</TableCell>
               ) : (
-                <TableCell key={name} onClick={() => sortColumn(name, isSorted)}>{name}</TableCell>
+                <TableCell className="clickable" key={name} onClick={() => sortColumn(name, isSorted)}>{name}</TableCell>
               )
             })}
           </TableRow>
