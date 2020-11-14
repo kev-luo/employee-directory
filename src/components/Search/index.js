@@ -1,5 +1,5 @@
-import React from 'react';
-import { Paper, TextField, Grid, Button } from '@material-ui/core';
+import React, { useState } from 'react';
+import { Paper, TextField, Grid, InputLabel, Select, MenuItem, FormControl } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { usePeople } from '../../utils/PeopleContext';
@@ -12,13 +12,16 @@ const useStyles = makeStyles({
   grid: {
     paddingRight: 16
   },
-  button: {
-    color: '#29b6f6'
+  dropdown: {
+    minWidth: 120,
+    marginTop: '1rem'
   }
 })
 
 function Search() {
-  const { people, setSearchResults, search, setSearch } = usePeople();
+  const [dropdown, setDropdown] = useState('');
+
+  const { people, setSearchResults, categories, isLoading, search, setSearch } = usePeople();
 
   const handleSearch = (e) => {
     const searchTerm = e.target.value;
@@ -28,18 +31,29 @@ function Search() {
     })
     setSearchResults(filteredPeople);
   }
+  console.log(categories);
 
   const classes = useStyles();
   return (
     <Paper className={classes.root}>
       <Grid container>
-        <Grid item xs={10} md={11} className={classes.grid}>
-          <TextField value={search} onChange={handleSearch} fullWidth/>
-        </Grid>
-        <Grid item xs={2} md={1}>
-          <Button fullWidth variant="outlined" className={classes.button}>
-          Search
-          </Button>
+        <Grid item xs={8} md={10} className={classes.grid}>
+          <TextField value={search} onChange={handleSearch} placeholder={`Search...`} fullWidth />
+          <FormControl className={classes.dropdown}>
+            <InputLabel id="dropdown">Category</InputLabel>
+            <Select
+              labelId="dropdown"
+              id="demo-simple-select"
+              value={dropdown}
+              onChange={(e) => setDropdown(e.target.value)}
+            >
+            {isLoading || categories.map(({ name }) => {
+              return(
+                <MenuItem value={name}>{name}</MenuItem>
+              )
+            })}
+            </Select>
+          </FormControl>
         </Grid>
       </Grid>
     </Paper>
