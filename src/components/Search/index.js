@@ -6,7 +6,7 @@ import { usePeople } from '../../utils/PeopleContext';
 
 const useStyles = makeStyles({
   root: {
-    margin: 16,
+    margin: '1rem 8rem',
     padding: 16,
   },
   grid: {
@@ -44,7 +44,7 @@ function Search() {
   return (
     <Paper className={classes.root}>
       <Grid container>
-        <Grid item xs={8} md={10} className={classes.grid}>
+        <Grid item xs={12} md={12} className={classes.grid}>
           <TextField value={search} onChange={handleSearch} placeholder={`Search...`} fullWidth />
           <FormControl className={classes.dropdown}>
             <InputLabel id="dropdown">Category</InputLabel>
