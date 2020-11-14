@@ -34,6 +34,7 @@ export default function TableRows() {
 
   useEffect(() => {
     searchApi();
+    setCategories(['Image', 'Name', 'Age', 'Location', 'Email'])
   },[])
 
   const sortColumn = () => {
@@ -46,11 +47,11 @@ export default function TableRows() {
       <Table stickyHeader>
         <TableHead>
           <TableRow>
-            <TableCell>Image</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Age</TableCell>
-            <TableCell>Location</TableCell>
-            <TableCell>Email</TableCell>
+            {isLoading || categories.map(category => {
+              return (
+                <TableCell onClick={sortColumn}>{category}</TableCell>
+              )
+            })}
           </TableRow>
         </TableHead>
         <TableBody>
