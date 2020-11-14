@@ -38,10 +38,12 @@ export default function TableRow() {
           </Table.HeaderCell>
             <Table.HeaderCell
               onClick={sortColumn}
+              sorted='ascending'
             >
               Name
             </Table.HeaderCell>
           <Table.HeaderCell
+          onClick={sortColumn}
           >
             Location
           </Table.HeaderCell>
