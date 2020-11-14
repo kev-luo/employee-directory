@@ -2,6 +2,7 @@ import React from 'react';
 import { TableBody, TableRow, TableCell } from '@material-ui/core';
 
 import { usePeople } from '../../utils/PeopleContext';
+import './TableRows.css';
 
 export default function TableRows() {
   const { searchResults, isLoading } = usePeople();
@@ -21,7 +22,7 @@ export default function TableRows() {
       ) : (
         searchResults.map(person => {
           return (
-            <TableRow key={person.id}>
+            <TableRow className="styledRow" key={person.id}>
               <TableCell><img src={person.image} alt={person.firstname} /></TableCell>
               <TableCell>{person.firstname}</TableCell>
               <TableCell>{person.lastname}</TableCell>
