@@ -1,12 +1,13 @@
+import 'semantic-ui-css/semantic.min.css';
 import './App.css';
-import Employee from './components/Employee';
-import Navbar from './components/Navbar';
+import Table from './components/Table';
+import TableRow from './components/TableRow';
 
 function App() {
   return (
     <div>
-      <Navbar />
-      <Employee />
+      <Table />
+      <TableRow />
     </div>
   );
 }
