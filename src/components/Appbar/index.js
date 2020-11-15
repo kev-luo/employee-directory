@@ -22,7 +22,7 @@ function Appbar() {
       <AppBar position="relative" className={classes.appbar}>
         <Toolbar>
           <Typography color="inherit" variant='h6'>
-            <Link href='/' color='inherit'>Employee Search</Link>
+            <Link href='/employee-directory' color='inherit'>Employee Search</Link>
           </Typography>
         </Toolbar>
       </AppBar>
