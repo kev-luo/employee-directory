@@ -23,7 +23,14 @@ This is a single page application made with create-react-app. The application pu
 
 ## Usage
 
+One of the main challenges in making this site was getting comfortable using Material UI's components and familiarizing myself with each component's props. Another issue I ran into when implementing useContext is learning that any component that calls useContext will be re-rendered anytime the context provider's state changes. This would cause massive performance issues if any consuming component required intensive calculations for each render. While useReducer fixes this by only re-rendering components that need to re-render, this application was still small enough to justify not implementing useReducer. 
 
+Code snippet of the return statement in my context provider:
+```
+<PeopleContext.Provider value={{ people, categories, isLoading, sortColumn, search, setSearch, searchResults, setSearchResults }}>
+  { children }
+</PeopleContext.Provider>
+```
 
 ## License
 Licensed under the [MIT](https://opensource.org/licenses/MIT) License.

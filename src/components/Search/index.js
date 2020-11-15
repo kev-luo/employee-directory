@@ -25,18 +25,15 @@ function Search() {
   const handleSearch = (e) => {
     const searchTerm = e.target.value;
     setSearch(searchTerm);
-    let filteredPeople;
-    if (dropdown === '') {
-      filteredPeople = people.filter(person => {
+    let filteredPeople = people.filter(person => {
+      if(dropdown === '') {
         return person.firstname.toLowerCase().includes(searchTerm.toLowerCase());
-      })
-    } else {
-      filteredPeople = people.filter(person => {
+      } else {
         let formatCat = dropdown.split(' ').join('').toLowerCase();
         let details = person[formatCat]
         return details.toLowerCase().includes(searchTerm.toLowerCase());
-      })
-    }
+      }
+    })
     setSearchResults(filteredPeople);
   }
 
@@ -45,7 +42,7 @@ function Search() {
     <Paper className={classes.root}>
       <Grid container>
         <Grid item xs={12} md={12} className={classes.grid}>
-          <TextField value={search} onChange={handleSearch} placeholder={`Search...`} fullWidth />
+          <TextField value={search} onChange={handleSearch} placeholder='Search...' fullWidth />
           <FormControl className={classes.dropdown}>
             <InputLabel id="dropdown">Category</InputLabel>
             <Select
